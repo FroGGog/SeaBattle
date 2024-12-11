@@ -49,7 +49,7 @@ int main()
 		{0,0},
 		{2,0},
 		{5,6}, {5, 7},
-		{7,1},{7,1},{7,3},{7,4}
+		{7,1},{7,2},{7,3},{7,4}
 	};
 
 	Enemy enemy{ enemyShipsPosition };
@@ -108,6 +108,11 @@ int main()
 
 	while (bt_player.isInGame())
 	{
+		if(bt_player.getShipsCount() == 0 || enemy.getShipsCount() == 0)
+		{
+			bt_player.changeGameState();
+		}
+
 		if (playerTurn) {
 			bt_player.update();
 			playerTurn = false;

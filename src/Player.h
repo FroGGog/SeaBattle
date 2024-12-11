@@ -97,7 +97,7 @@ private:
 	std::pair<int, int> currentPosition;
 
 	bool inGame;
-	int shipsCount; 
+	int enemyShipsCount; 
 
 	void doShoot(std::pair<int, int> shootPosition);
 
@@ -112,5 +112,8 @@ public:
 	const std::vector<std::pair<int, int>>& getShipsPositions();
 	const std::pair<int, int>& getPosition() override;
 	const bool isInGame() const;
+	const int getShipsCount() const;
+
+	void changeGameState();
 
 };

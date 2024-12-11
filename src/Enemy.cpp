@@ -3,6 +3,7 @@
 Enemy::Enemy(std::vector<std::pair<int, int>>& shipPositions)
 {
 	placedShipsPositions = shipPositions;
+    enemyShipsCount = 20;
 }
 
 void Enemy::Shoot(const std::vector<std::pair<int, int>>& playerShipsPostions)
@@ -20,14 +21,15 @@ void Enemy::Shoot(const std::vector<std::pair<int, int>>& playerShipsPostions)
     // Then try shoot
     auto p_shoot = std::find(playerShipsPostions.begin(), playerShipsPostions.end(), shootPosition);
 
-    // So if player missed
+    // So if enemy missed
     if (p_shoot == playerShipsPostions.end()) {
         shootedPostions.push_back(shootPosition);
     }
-    // If player hit enemy ship
+    // If enemy hit enemy ship
     else {
         shootedPostions.push_back(shootPosition);
         hitedPositions.push_back(shootPosition);
+        enemyShipsCount--;
     }
 
 }
@@ -45,4 +47,9 @@ const std::vector<std::pair<int, int>>& Enemy::getShootsPositions()
 const std::vector<std::pair<int, int>>& Enemy::getHitPositions()
 {
     return hitedPositions;
+}
+
+const int Enemy::getShipsCount() const
+{
+    return enemyShipsCount;
 }

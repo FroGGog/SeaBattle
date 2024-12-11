@@ -386,7 +386,7 @@ BattlePlayer::BattlePlayer(Enemy& enemy) : Player()
     for (auto i : enemy.getPlacedShipsPositions()) {
         shipsPositions.push_back(i);
     }
-    shipsCount = 10;
+    enemyShipsCount = 8;
     inGame = true;
 }
 
@@ -421,9 +421,34 @@ void BattlePlayer::update()
     std::cout << "Please enter field where to shoot in form(A1 or B2) : ";
     std::cin >> answer;
 
+    if(answer.size() > 2)
+    {
+        std::cout << "Invalid position\n";
+        return update();
+    }
+
+    if (answer[0] > 73 || answer[0] < 65)
+    {
+        std::cout << "Invalid letter\n";
+        return update();
+    }
+    if (!std::isdigit(answer[1]) || answer[1] == '0') {
+        std::cout << "Invalid number\n";
+        return update();
+    }
+
     int second = abs(65 - answer[0]);
     int first = (answer[1] - '0') - 1;
     std::pair<int, int> shootPosition{ first, second };
+
+    for (auto& i : shootsPositions)
+    {
+        if(i == shootPosition)
+        {
+            std::cout << "Enter another field.\n";
+            update();
+        }
+    }
 
     doShoot(shootPosition);
 
@@ -452,4 +477,14 @@ const std::pair<int, int>& BattlePlayer::getPosition()
 const bool BattlePlayer::isInGame() const
 {
     return inGame;
+}
+
+const int BattlePlayer::getShipsCount() const
+{
+    return enemyShipsCount;
+}
+
+void BattlePlayer::changeGameState()
+{
+    inGame != inGame;
 }

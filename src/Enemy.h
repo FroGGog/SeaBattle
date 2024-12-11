@@ -8,6 +8,8 @@ private:
 	std::vector<std::pair<int, int>> shootedPostions;
 	std::vector<std::pair<int, int>> hitedPositions;
 
+	int enemyShipsCount;
+
 public:
 
 	Enemy(std::vector<std::pair<int, int>>& shipPositions);
@@ -17,5 +19,6 @@ public:
 	const std::vector<std::pair<int, int>>& getPlacedShipsPositions();
 	const std::vector<std::pair<int, int>>& getShootsPositions();
 	const std::vector<std::pair<int, int>>& getHitPositions();
+	const int getShipsCount() const;
 
 };
